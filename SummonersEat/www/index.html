@@ -1,0 +1,259 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Summoner's eat</title>
+	<link rel="shortcut icon" href="i	mages\logo.ico">
+	<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="css/Design.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<link rel="stylesheet" href="css/listview-grid.css">
+	<style>
+	a
+	{
+	text-decoration:none;
+	}
+		
+        .ui-icon-myicon:after {
+			background-image: url("images/21-skull.png");
+			/* Make your icon fit */
+			background-size: 18px 18px;
+		}
+
+	</style>
+	
+	<script>
+
+	var geocoder;
+	var map;
+	var latlng;
+	var lugar;
+	var names;
+	function initialize(lat,lng) {
+
+  geocoder = new google.maps.Geocoder();
+  latlng = new google.maps.LatLng(lat,lng);
+  codeLatLng();
+  
+  var mapOptions = {
+    zoom: 8,
+    center: latlng,
+    mapTypeId: 'roadmap'
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+}
+
+	
+	
+	function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+		
+    } else {
+        x.innerHTML = "Geolocation is not supported by this Unit.";
+    }
+	}
+	
+	
+	function showPosition(position) {
+	lat= position.coords.latitude;
+    lng= position.coords.longitude; 
+	console.log(lat+" haha " +lng);
+	initialize(lat,lng);
+	}
+	function exit(){
+	var r=confirm("Are you sure you want to exit?");
+						if(r==true)
+									{
+							close();
+									}
+						}
+	function magic(){
+	names = document.getElementById("txtnames").value;
+	if(names){
+	var array  = names.split(",");
+	var length = array.length;
+	var rnd = Math.floor(Math.random() * length) + 0;
+	var taya = array[rnd];
+		document.getElementById("txtTaya").innerHTML = "Summoner Who will treat the eat is: "+taya ;
+		document.getElementById("txtbilangngtaya").innerHTML = "Number of Names: "+length ;
+	document.getElementById("txtnames").innerHTML = "Summoner's Name Pool: " +names;	
+	getLocation();
+	}else{
+	alert("Input Names First");
+	}
+	}
+	
+function codeLatLng() {
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+	lugar = results[0].formatted_address;
+	document.getElementById("txtlocation").innerHTML="Place is: "+ lugar;
+
+	
+
+      } else {
+        alert('No results found');
+      }
+    } else {
+      alert('Geocoder failed due to: ' + status);
+    }
+  });
+}							
+						
+	</script>
+</head>
+<body  >
+
+<!--======================================Start Page=====================================-->
+<div data-role="page" id="cover" data-theme="b">	
+		<div align="center" style="width:100%;max-width:700px;margin-left:auto;margin-right:auto;">
+				<div align="center" style=";margin-right:auto;margin-left:auto;">
+					<br>
+					<img src="images/logo.png" style="width:99%;height:auto">
+				</div>
+				
+				<div style="margin-top:10%;margin-bottom:10%;border-radius:12px;box-shadow:1px 1px 5px black;background-color:#f7921e;width:88%;;margin-left:auto;margin-right:auto;">
+				<br>
+				<div  style="bottom:200px;width:80%;margin-right:auto;margin-left:auto;">
+						<a href="#home" id="start" data-theme="a" data-transition="slideup"><button>Summon Them</button></a>
+				</div>
+				
+				<br>
+				</div>
+				<br>
+		</div>
+</div>
+<!--======================================Home=====================================-->
+
+<div  data-role="page" id="home" data-theme="b">
+	<div data-role="header" ><h1><img src="images\logo.ico" \ style="height:25px;width:25px;"> &nbsp; Summoner's Eat</h1>
+	<div data-role="navbar" data-theme="b">
+		<ul>
+		<li><a href="#home" class="ui-btn-active" data-icon="home" data-transition="none"></a></li>
+		<li><a href="#info" data-icon="info" data-transition="none"></a></li>
+		<li><a href="#help"  data-icon="star" data-transition="none"></a></li>
+		<li><a href="#summon"   data-icon="myicon" data-transition="none"></a></li>
+
+		</ul>
+	</div></div>
+		<div align="center" style="width:100%;max-width:700px;margin-left:auto;margin-right:auto;">
+				<div align="center" style=";margin-right:auto;margin-left:auto;">
+					<br>
+					<img src="images/logo.png" style="width:99%;height:auto">
+				</div>
+				<br>
+				</div>
+				<br>
+
+		</div>
+</div>
+
+
+
+
+
+
+
+<!--======================================App Information=====================================-->
+<div data-role="page" id="info" data-theme="b" >
+	<div data-role="header" ><h1><img src="images\logo.ico" \ style="height:25px;width:25px;"> &nbsp; Summoner's Eat</h1>
+	<div data-role="navbar">
+		<ul>
+		<li><a href="#home"   data-icon="home" data-transition="none"></a></li>
+		<li><a href="#info" class="ui-btn-active" data-icon="info" data-transition="none"></a></li>
+		<li><a href="#help"  data-icon="star" data-transition="none"></a></li>
+		<li><a href="#summon"   data-icon="myicon" data-transition="none"></a></li>
+
+		</ul>
+	</div>
+	</div>
+				<div data-role="main" class="ui-content" >
+		<div data-role="content" data-inset="true">
+   	
+						<p>This part is Information</p>
+						<p>This Application is Made by Ashbee Morgado for his final requirement on his free elective subject at Gordon College CCS</p>
+						<p> Follow him at twitter: 	</p>
+						<p><a style="background-color:transparent;" class="twitter-follow-button" href="https://twitter.com/ashashbee">Follow @ashashbee</a></p>
+						<script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script>
+						<p>Like Us on Facebook: </p><iframe src="http://www.facebook.com/plugins/like.php?href=https://www.facebook.com/SummonersEat&amp;	&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;share=true&amp;"
+								scrolling="no"
+						frameborder="0"
+						allowTransparency="false">
+						</iframe>
+						</div>
+						</div>
+
+
+</div>
+
+
+
+
+
+<!--======================================HELP=====================================-->
+<div data-role="page" id="help" data-theme="b" >
+	<div data-role="header" ><h1><img src="images\logo.ico" \ style="height:25px;width:25px;"> &nbsp; Summoner's Eat</h1>
+	<div data-role="navbar">
+		<ul>
+		<li><a href="#home"   data-icon="home" data-transition="none"></a></li>
+		<li><a href="#info" class="ui-btn-active" data-icon="info" data-transition="none"></a></li>
+		<li><a href="#help"  data-icon="star" data-transition="none"></a></li>
+		<li><a href="#summon"   data-icon="myicon" data-transition="none"></a></li>
+
+		</ul>
+	</div></div>
+<div data-role="main" class="ui-content" >
+		<div data-role="content" data-inset="true">
+   
+	
+				<p><b><h1>Help</h1></b></p>
+						<p>Summoner's Eat is an application that returns random name from a list</p>
+						<p>How to</p>
+						<p>--Enter names on textbox separated by commans (",") example ("Ashbee,Is,Super,Handsome,And,Super,Awesome")</p>
+						<p>From this lists the application will summon from the lists and result who will be the one who'll pay the food and it will also return the location of the user</p>
+						
+				
+					
+		</div>
+	</div>
+
+
+</div>
+
+
+<!--=====================================App Function=====================================-->
+
+
+<div data-role="page" id="summon" data-theme="b">
+<div data-role="header" ><h1><img src="images\logo.ico" \ style="height:25px;width:25px;"> &nbsp; Summoner's Eat</h1>
+	<div data-role="navbar">
+		<ul>
+		<li><a href="#home" data-icon="home" data-transition="none"></a></li>
+		<li><a href="#info" data-icon="info" data-transition="none"></a></li>
+		<li><a href="#help" data-icon="star" data-transition="none"></a></li>
+		<li><a href="#summon" class="ui-btn-active" data-icon="myicon" data-transition="none"></a></li>
+
+		</ul>
+	</div></div>
+		<div data-role="main" class="ui-content" >
+		<div data-role="content" data-inset="true">
+   
+	<h2>Names: </h2><input type="text" id ="txtnames" placeholder="Enter Names Separated by Comas( , )" />
+	<button onclick="magic()">Summon Eat Bringer</button>
+						<h4 id="txtTaya" ></h1>
+						<h4 id="txtlocation"></h1>
+						<h4 id="txtbilangngtaya"></h1>
+			
+				
+					
+		</div>
+	</div>
+</div>
+</body>
+
+</html>
